@@ -267,7 +267,7 @@
         ]
       },
       "properties": {
-        "name": "Darren O'Day",
+        "name": "Darren O\'Day",
         "team": "Baltimore Orioles",
         "hometown": "Jacksonville FL ",
         "salary": "2200000",
@@ -10955,7 +10955,7 @@
         ]
       },
       "properties": {
-        "name": "Eric O'Flaherty",
+        "name": "Eric O\'Flaherty",
         "team": "Atlanta Braves",
         "hometown": "Walla Walla WA ",
         "salary": "4320000",
@@ -17739,7 +17739,7 @@
         ]
       },
       "properties": {
-        "name": "Sean O'Sullivan",
+        "name": "Sean O\'Sullivan",
         "team": "San Diego Padres",
         "hometown": "San Diego CA ",
         "salary": "N/A",
@@ -18701,7 +18701,7 @@
       "properties": {
         "name": "Trevor Rosenthal",
         "team": "St. Louis Cardinals",
-        "hometown": "Lee's Summit MO ",
+        "hometown": "Lee\'s Summit MO ",
         "salary": "490000",
         "games": "43",
         "gs": "0",
