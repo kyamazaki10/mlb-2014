@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!--<link rel='shortcut icon' href='images/favicon.ico'>-->
+
+        <link rel="stylesheet" type="text/css" href="assets/stylesheets/main.css" />
+        <link rel="stylesheet" type="text/css" href="assets/stylesheets/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/stylesheets/markercluster.css" />
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+            <link rel="stylesheet" href="assets/stylesheets/markercluster.ie.css" />
+        <![endif]-->
+
+        <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+        <script src="http://beta.mapquestapi.com/sdk/leaflet/v0.1/mq-map.js?key=Fmjtd%7Cluu2n102nq%2Cr0%3Do5-hwaa1"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="scripts/libs/markercluster.js" type="text/javascript"></script>
+        <script src="scripts/libs/bootstrap.min.js" type="text/javascript"></script>
+        <script src="scripts/libs/underscore.js" type="text/javascript"></script>
+        <script src="scripts/libs/backbone.js" type="text/javascript"></script>
+        <script src="scripts/main.js" type="text/javascript"></script>
+
+        <title>2013 MLB Players</title>
+    </head>
+
+    <body>
+
+        <div class="header">
+            <div class="btn-group teams">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                    Filter By Team <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li>Atlanta Braves</li>
+                    <li>Miami Marlins</li>
+                    <li>New York Mets</li>
+                    <li>Philadelphia Phillies</li>
+                    <li>Washington Nationals</li>
+                </ul>
+            </div>
+
+            <div class="btn-group teams">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                    Filter By Salary <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li>&gt; $20 million</li>
+                    <li>&gt; $15 million</li>
+                    <li>&gt; $10 million</li>
+                    <li>&gt; $ 5 million</li>
+                    <li>&gt; $ 3 million</li>
+                    <li>&gt; $ 2 million</li>
+                    <li>&gt; $ 1 million</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+    </body>
+</html>
