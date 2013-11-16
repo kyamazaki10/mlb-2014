@@ -12,6 +12,8 @@ $(function() {
     });
 
     MLB.Views.Map = Backbone.View.extend({
+        templates: {},
+
         initialize: function(model) {
             var self = this;
 
@@ -51,18 +53,44 @@ $(function() {
                     var players = data.searchResults,
                         markers = [],
                         marker,
-                        fields;
+                        fields,
+                        i;
 
                     for (i=0; i<players.length; i++) {
                         fields = players[i].fields;
+                        html = self.render('marker', fields);
 
-                        marker = L.marker([ fields.latitude, fields.longitude ]);
+                        marker = L.marker([ fields.latitude, fields.longitude ])
+                                    .bindPopup(html);
+
+                        marker.on('mouseover', function(e) {
+                            this.openPopup();
+                        });
+
                         markers.push(marker);
                     }
 
                     self.lg = L.layerGroup(markers).addTo(self.map);
                 }
             });
+        },
+
+        render: function(tmpl_name, tmpl_data) {
+            var self = this;
+
+            if (!self.templates[tmpl_name]) {
+                var url = 'assets/templates/' + tmpl_name + '.html';
+
+                $.ajax({
+                    url: url,
+                    async: false,
+                    success: function(data) {
+                        self.templates[tmpl_name] = _.template(data);
+                    }
+                });
+            }
+
+            return self.templates[tmpl_name](tmpl_data);
         }
     });
 
