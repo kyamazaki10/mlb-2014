@@ -15,9 +15,6 @@ $(function() {
         initialize: function(model) {
             var self = this;
 
-            self.criteria = '',
-            self.params = '';
-
             self.map = L.map('map', {
                 layers: MQ.mapLayer(),
                 center: [ 38.347432, -98.200326 ],
@@ -26,17 +23,28 @@ $(function() {
 
             self.get_players();
 
-            model.on('change', self.get_players, self);
+            model.on('change', self.get_query, self);
         },
 
-        get_players: function() {
-            var self = this;
+        get_query: function() {
+            var team = model.get('team'),
+                criteria = (team === 'all') ? '' : 'team=?',
+                params = (team === 'all') ? '' : team;
+
+            this.lg.clearLayers();
+            this.get_players(criteria, params);
+        },
+
+        get_players: function(criteria, params) {
+            var self = this,
+                criteria = criteria || '',
+                params = params || '';
 
             $.ajax({
                 url: 'http://www.mapquestapi.com/search/v2/recordinfo?key=Fmjtd%7Cluubn9ubl9%2C2n%3Do5-902n1a',
                 dataType: 'jsonp',
                 data: {
-                    hostedData: 'mqap.121123_mlb_batting|' + self.criteria + '|' + self.params,
+                    hostedData: 'mqap.121123_mlb_batting|' + criteria + '|' + params,
                     maxMatches: 1000
                 },
                 success: function(data) {
