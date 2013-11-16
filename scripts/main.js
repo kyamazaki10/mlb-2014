@@ -6,12 +6,17 @@ var MLB = {
 $(function() {
 
     MLB.Models.Players = Backbone.Model.extend({
-        url: 'geojson/batting.geojson'
+        defaults: {
+            team: 'all'
+        }
     });
 
     MLB.Views.Map = Backbone.View.extend({
         initialize: function(model) {
             var self = this;
+
+            self.criteria = '',
+            self.params = '';
 
             self.map = L.map('map', {
                 layers: MQ.mapLayer(),
@@ -19,23 +24,37 @@ $(function() {
                 zoom: 4
             });
 
-            self.update();
+            self.get_players();
 
-            model.on('change', self.update, self);
+            model.on('change', self.get_players, self);
         },
 
-        update: function() {
-            var features = this.attributes.features,
-                latlng,
-                marker,
-                i;
+        get_players: function() {
+            var self = this;
 
-            for (i=0; i<features.length; i++) {
-                latlng = features[i].geometry.coordinates;
+            $.ajax({
+                url: 'http://www.mapquestapi.com/search/v2/recordinfo?key=Fmjtd%7Cluubn9ubl9%2C2n%3Do5-902n1a',
+                dataType: 'jsonp',
+                data: {
+                    hostedData: 'mqap.121123_mlb_batting|' + self.criteria + '|' + self.params,
+                    maxMatches: 1000
+                },
+                success: function(data) {
+                    var players = data.searchResults,
+                        markers = [],
+                        marker,
+                        fields;
 
-                marker = L.marker([ latlng[1], latlng[0] ]);
-                this.map.addLayer(marker);
-            }
+                    for (i=0; i<players.length; i++) {
+                        fields = players[i].fields;
+
+                        marker = L.marker([ fields.latitude, fields.longitude ]);
+                        markers.push(marker);
+                    }
+
+                    self.lg = L.layerGroup(markers).addTo(self.map);
+                }
+            });
         }
     });
 
@@ -46,24 +65,15 @@ $(function() {
             'click .teams li' : 'change_team'
         },
 
-        initialize: function(model) {
-            this.model = model;
-        },
+        change_team: function(e) {
+            var team = e.currentTarget.innerText;
 
-        change_team: function() {
-            // TODO: update this. random model change to test event firing.
-            var temp = this.model.attributes.features.pop();
-
-            this.model.set(temp);
+            model.set({ team: team });
         }
     });
 
-    var players = new MLB.Models.Players();
+    var model = new MLB.Models.Players();
 
-    players.fetch({
-        success: function(model) {
-            new MLB.Views.Map(model);
-            new MLB.Views.Menu(model);
-        }
-    });
+    new MLB.Views.Map(model);
+    new MLB.Views.Menu();
 });
