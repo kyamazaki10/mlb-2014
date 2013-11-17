@@ -52,22 +52,14 @@ $(function() {
                 success: function(data) {
                     var players = data.searchResults,
                         markers = [],
-                        marker,
                         fields,
                         i;
 
                     for (i=0; i<players.length; i++) {
-                        fields = players[i].fields;
-                        html = self.render('marker', fields);
+                        fields = self.format_fields(players[i].fields);
+                        html = self.render_popup('marker', fields);
 
-                        marker = L.marker([ fields.latitude, fields.longitude ])
-                                    .bindPopup(html);
-
-                        marker.on('mouseover', function(e) {
-                            this.openPopup();
-                        });
-
-                        markers.push(marker);
+                        markers.push(self.get_marker(fields.latitude, fields.longitude, html));
                     }
 
                     self.lg = L.layerGroup(markers).addTo(self.map);
@@ -75,7 +67,17 @@ $(function() {
             });
         },
 
-        render: function(tmpl_name, tmpl_data) {
+        get_marker: function(lat, lng, html) {
+            var marker = L.marker([ lat, lng ]).bindPopup(html);
+
+            marker.on('mouseover', function() {
+                this.openPopup();
+            });
+
+            return marker;
+        },
+
+        render_popup: function(tmpl_name, tmpl_data) {
             var self = this;
 
             if (!self.templates[tmpl_name]) {
@@ -91,6 +93,30 @@ $(function() {
             }
 
             return self.templates[tmpl_name](tmpl_data);
+        },
+
+        format_fields: function(fields) {
+            var key;
+
+            for (key in fields) {
+                if (fields.hasOwnProperty(key)) {
+                    switch(key) {
+                        case 'ba' :
+                        case 'obp' :
+                        case 'slg' :
+                            fields[key] = fields[key].toFixed(3).replace(/^[0]+/g, '');
+                            break;
+                        case 'salary' :
+                            fields[key] = (fields[key] === null) ? 'N/A' : '$' + fields[key].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        default : break;
+                    }
+                }
+            }
+
+            fields.birthplace = fields.city + ', ';
+            fields.birthplace += (fields.country === '') ? fields.state : fields.country;
+
+            return fields;
         }
     });
 

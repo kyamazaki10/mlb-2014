@@ -10,13 +10,68 @@ body {
     padding: 0;
 }
 
-.header {
-    width: 100%;
-    height: 80px;
+table, th, td {
+    font-size: 18px;
+    text-align: center;
+    border: solid 1px #CCC;
+}
+
+th {
+    color: #444;
+    padding: 10px 20px;
+    background-color: #DDD;
+}
+
+td {
+    padding: 10px 0;
 }
 
 #map {
     width: 100%;
     height: 100%;
     background-color: #CCC;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+}
+
+.leaflet-popup-content .mlb p {
+    margin: 0;
+}
+
+.leaflet-popup-content .name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.leaflet-popup-content .team {
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.stats {
+    width: 300px;
+    margin: 15px 0;
+}
+
+.stats-mini {
+    width: 300px;
+    margin-top: 10px;
+}
+
+.stats-mini th, .stats-mini td {
+    font-size: 12px;
+    border: solid 1px #DDD;
+}
+
+.stats-mini th {
+    padding: 4px 8px;
+    background-color: #EEE;
+}
+
+.stats-mini td {
+    padding: 4px 0;
 }

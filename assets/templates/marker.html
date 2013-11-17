@@ -1,3 +1,81 @@
-<div class="infowindow">
-	<p class="name"><%= name %>, <%= position %></p>
+<div class="mlb">
+    <div class="name"><%= name %>, <%= position %></div>
+    <div class="team"><%= team %></div>
+
+    <div>Birthplace: <%= birthplace %></div>
+    <div>2013 Salary: <%= salary %></div>
+
+    <table class="stats">
+        <thead>
+            <tr>
+                <th>BA</th>
+                <th>HR</th>
+                <th>RBI</th>
+                <th>R</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= ba %></td>
+                <td><%= hr %></td>
+                <td><%= rbi %></td>
+                <td><%= r %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="stats-mini">
+        <thead>
+            <tr>
+                <th>G</th>
+                <th>AB</th>
+                <th>R</th>
+                <th>H</th>
+                <th>2B</th>
+                <th>3B</th>
+                <th>HR</th>
+                <th>RBI</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= g %></td>
+                <td><%= ab %></td>
+                <td><%= r %></td>
+                <td><%= h %></td>
+                <td><%= doubles %></td>
+                <td><%= triples %></td>
+                <td><%= hr %></td>
+                <td><%= rbi %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="stats-mini">
+        <thead>
+            <tr>
+                <th>SB</th>
+                <th>CS</th>
+                <th>BB</th>
+                <th>SO</th>
+                <th>BA</th>
+                <th>OBP</th>
+                <th>SLG</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= sb %></td>
+                <td><%= cs %></td>
+                <td><%= bb %></td>
+                <td><%= so %></td>
+                <td><%= ba %></td>
+                <td><%= obp %></td>
+                <td><%= slg %></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
