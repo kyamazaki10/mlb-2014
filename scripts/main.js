@@ -19,8 +19,8 @@ $(function() {
 
             self.map = L.map('map', {
                 layers: MQ.mapLayer(),
-                center: [ 38.347432, -98.200326 ],
-                zoom: 4
+                center: [ 31.928033, -12.318236 ],
+                zoom: 2
             });
 
             self.get_players();
@@ -33,7 +33,7 @@ $(function() {
                 criteria = (team === 'all') ? '' : 'team=?',
                 params = (team === 'all') ? '' : team;
 
-            this.lg.clearLayers();
+            this.group.clearLayers();
             this.get_players(criteria, params);
         },
 
@@ -62,7 +62,8 @@ $(function() {
                         markers.push(self.get_marker(fields.latitude, fields.longitude, html));
                     }
 
-                    self.lg = L.layerGroup(markers).addTo(self.map);
+                    self.group = L.featureGroup(markers).addTo(self.map);
+                    self.map.fitBounds(self.group.getBounds());
                 }
             });
         },
