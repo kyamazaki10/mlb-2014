@@ -29,13 +29,12 @@
     <body>
 
         <div class="header">
+            <span class="filter">Filter by Team</span>
             <div class="btn-group teams">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                    Filter By Team <span class="caret"></span>
-                </button>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">---</button>
 
-                <ul class="dropdown-menu" role="menu">
-                    <li>all</li>
+                <ul id="team" class="dropdown-menu" role="menu">
+                    <li>---</li>
                     <li>Arizona Diamondbacks</li>
                     <li>Atlanta Braves</li>
                     <li>Baltimore Orioles</li>
@@ -69,21 +68,23 @@
                 </ul>
             </div>
 
-            <div class="btn-group teams">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                    Filter By Salary <span class="caret"></span>
-                </button>
+            <span class="filter">Filter by Salary</span>
+            <div class="btn-group salary">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">---</button>
 
-                <ul class="dropdown-menu" role="menu">
+                <ul id="salary" class="dropdown-menu" role="menu">
+                    <li>---</li>
                     <li>&gt; $20 million</li>
                     <li>&gt; $15 million</li>
                     <li>&gt; $10 million</li>
-                    <li>&gt; $ 5 million</li>
-                    <li>&gt; $ 3 million</li>
-                    <li>&gt; $ 2 million</li>
-                    <li>&gt; $ 1 million</li>
+                    <li>&gt; $5 million</li>
+                    <li>&gt; $3 million</li>
+                    <li>&gt; $2 million</li>
+                    <li>&gt; $1 million</li>
                 </ul>
             </div>
+
+            <button type="button" class="btn btn-info update">Update Map</button>
         </div>
 
         <div id="map"></div>

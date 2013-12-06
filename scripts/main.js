@@ -7,7 +7,8 @@ $(function() {
 
     MLB.Models.Players = Backbone.Model.extend({
         defaults: {
-            team: 'all'
+            //team: null,
+            //salary: null
         }
     });
 
@@ -29,9 +30,25 @@ $(function() {
         },
 
         get_query: function() {
-            var team = model.get('team'),
-                criteria = (team === 'all') ? '' : 'team=?',
-                params = (team === 'all') ? '' : team;
+            var attributes = model.attributes,
+                criteria = '',
+                params = [],
+                count = 0,
+                operator,
+                key;
+
+            for (key in attributes) {
+                if (attributes.hasOwnProperty(key)) {
+                    operator = (key === 'salary') ? '>' : '=';
+
+                    criteria += (count > 0) ? ' and ' : '';
+                    criteria += key + operator + '?';
+
+                    params.push(attributes[key]);
+
+                    count++;
+                }
+            }
 
             this.group.clearLayers();
             this.get_players(criteria, params);
@@ -125,13 +142,39 @@ $(function() {
         el: '.header',
 
         events: {
-            'click .teams li' : 'change_team'
+            'click li' : 'change_text',
+            'click .update' : 'update'
         },
 
-        change_team: function(e) {
-            var team = e.currentTarget.innerText;
+        change_text: function(e) {
+            var target = e.currentTarget,
+                ul = $(target).parent(),
+                key = ul.attr('id'),
+                value = target.innerText;
 
-            model.set({ team: team });
+            // change text in dropdown
+            ul.siblings('button').text(value);
+
+            // if we have a specific selection
+            if (value !== '---') {
+
+                // compute proper salary value
+                value = (key === 'salary') ? value.match(/\d./) * 1000000 : value;
+
+                // set model
+                this.set_model(key, value);
+            }
+        },
+
+        set_model: function(key, value) {
+            var options = {};
+            options[key] = value;
+
+            model.set(options, { silent: true });
+        },
+
+        update: function() {
+            model.trigger('change');
         }
     });
 
