@@ -75,7 +75,7 @@ td {
     position: absolute;
     top: 15px;
     right: 10px;
-    z-index: 10;
+    z-index: 100;
 }
 
 .controls .update {
@@ -93,6 +93,20 @@ td {
 
 .controls li:hover {
     color: #5bc0de;
+}
+
+.no-players {
+    color: #900;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    padding: 15px 50px;
+    border-top: solid 1px #900;
+    border-left: solid 1px #900;
+    background-color: #DE6A6A;
+    display: none;
 }
 
 .leaflet-popup-content .mlb p {

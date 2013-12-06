@@ -67,22 +67,33 @@ $(function() {
                     maxMatches: 1000
                 },
                 success: function(data) {
-                    var players = data.searchResults,
-                        markers = [],
-                        fields,
-                        i;
+                    var players = data.searchResults;
 
-                    for (i=0; i<players.length; i++) {
-                        fields = self.format_fields(players[i].fields);
-                        html = self.render_popup('marker', fields);
-
-                        markers.push(self.get_marker(fields.latitude, fields.longitude, html));
-                    }
-
-                    self.group = L.featureGroup(markers).addTo(self.map);
-                    self.map.fitBounds(self.group.getBounds());
+                    players ? self.show_players(players) : self.no_players();
                 }
             });
+        },
+
+        show_players: function(players) {
+            var self = this,
+                html = '',
+                markers = [],
+                fields,
+                i;
+
+            for (i=0; i<players.length; i++) {
+                fields = self.format_fields(players[i].fields);
+                html = self.render_popup('marker', fields);
+
+                markers.push(self.get_marker(fields.latitude, fields.longitude, html));
+            }
+
+            self.group = L.featureGroup(markers).addTo(self.map);
+            self.map.fitBounds(self.group.getBounds());
+        },
+
+        no_players: function() {
+            $('.no-players').show().delay('3000').fadeOut();
         },
 
         get_marker: function(lat, lng, html) {
