@@ -39,6 +39,7 @@ td {
 }
 
 .title {
+    font-weight: normal;
     float: left;
 }
 
@@ -48,7 +49,7 @@ td {
 }
 
 .controls .filters {
-    margin: 5px 0;
+    margin: 5px 10px 5px 0;
 }
 
 .controls .btn {
@@ -61,8 +62,10 @@ td {
 }
 
 .controls .salary .btn,
-.controls .salary .dropdown-menu {
-    width: 130px;
+.controls .salary .dropdown-menu,
+.controls .position .btn,
+.controls .position .dropdown-menu {
+    width: 150px;
     min-width: auto;
 }
 
@@ -103,10 +106,14 @@ td {
     right: 0;
     z-index: 100;
     padding: 15px 50px;
-    border-top: solid 1px #900;
-    border-left: solid 1px #900;
-    background-color: #DE6A6A;
+    background-color: #FFF;
     display: none;
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=85)';
+    filter: alpha(opacity=85);
+    -moz-opacity: 0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
 }
 
 .leaflet-popup-content .mlb p {

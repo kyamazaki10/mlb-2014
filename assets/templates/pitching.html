@@ -1,0 +1,81 @@
+<div class="mlb">
+    <div class="name"><%= name %>, <%= position %></div>
+    <div class="team"><%= team %></div>
+
+    <div>Birthplace: <%= birthplace %></div>
+    <div>2013 Salary: <%= salary %></div>
+
+    <table class="stats">
+        <thead>
+            <tr>
+                <th>W</th>
+                <th>L</th>
+                <th>SO</th>
+                <th>ERA</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= w %></td>
+                <td><%= l %></td>
+                <td><%= so %></td>
+                <td><%= era %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="stats-mini">
+        <thead>
+            <tr>
+                <th>W</th>
+                <th>L</th>
+                <th>G</th>
+                <th>GS</th>
+                <th>IP</th>
+                <th>H</th>
+                <th>R</th>
+                <th>ER</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= w %></td>
+                <td><%= l %></td>
+                <td><%= g %></td>
+                <td><%= gs %></td>
+                <td><%= ip %></td>
+                <td><%= h %></td>
+                <td><%= r %></td>
+                <td><%= er %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="stats-mini">
+        <thead>
+            <tr>
+                <th>HR</th>
+                <th>BB</th>
+                <th>IBB</th>
+                <th>SO</th>
+                <th>SV</th>
+                <th>ERA</th>
+                <th>WHIP</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= hr %></td>
+                <td><%= bb %></td>
+                <td><%= ibb %></td>
+                <td><%= so %></td>
+                <td><%= sv %></td>
+                <td><%= era %></td>
+                <td><%= whip %></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

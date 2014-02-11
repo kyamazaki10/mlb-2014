@@ -1,9 +1,9 @@
-var MLB = {
-    Models: {},
-    Views: {}
-};
-
 $(function() {
+
+    var MLB = {
+        Models: {},
+        Views: {}
+    };
 
     /**
      * MLB Players Model
@@ -35,8 +35,8 @@ $(function() {
                 zoom: 2
             });
 
-            // send search request to retrieve players
-            self.get_players();
+            // get request data
+            self.get_data();
 
             // get new search query when a change is triggered
             model.on('change', self.get_query, self);
@@ -55,7 +55,7 @@ $(function() {
 
             // set extraCriteria and parameter properties needed for request
             for (key in attributes) {
-                if (attributes.hasOwnProperty(key)) {
+                if (attributes.hasOwnProperty(key) && key !== 'position') {
                     operator = (key === 'salary') ? '>' : '=';
 
                     criteria += (count > 0) ? ' and ' : '';
@@ -67,29 +67,54 @@ $(function() {
                 }
             }
 
-            // clear map and get new set of players to display
+            // clear map and get request data
             this.group.clearLayers();
-            this.get_players(criteria, params);
+            this.get_data(attributes.position, criteria, params);
+        },
+
+        /**
+         * Get data to be sent via ajax
+         * @param {String} position Player position
+         * @param {String} criteria Search criteria
+         * @param {Array} params Search parameters
+         */
+        get_data: function(position, criteria, params) {
+            var pos = position || '',
+                crit = criteria || '',
+                param = params || '',
+                table_name,
+                data;
+
+            // if a position was specified
+            if (position && position !== '') {
+                table_name = (pos === 'Batters') ? 'batting' : 'pitching';
+
+                data = 'hostedData=mqap.121123_mlb_' + table_name + '|' + crit + '|' + param;
+
+            // else search all positions
+            } else {
+                data = 'hostedData=mqap.121123_mlb_batting|' + crit + '|' + param;
+                data += '&hostedData=mqap.121123_mlb_pitching|' + crit + '|' + param;
+            }
+
+            // set max number of results returned
+            data += '&maxMatches=1200';
+
+            this.get_players(data);
         },
 
         /**
          * Getting players to display on map
-         * @param {String} criteria Search criteria
-         * @param {Array} params Search parameters
+         * @param {String} data Request data
          */
-        get_players: function(criteria, params) {
-            var self = this,
-                criteria = criteria || '',
-                params = params || '';
+        get_players: function(data) {
+            var self = this;
 
             // send ajax request to retrieve all players fitting the search criteria
             $.ajax({
                 url: 'http://www.mapquestapi.com/search/v2/recordinfo?key=Fmjtd%7Cluubn9ubl9%2C2n%3Do5-902n1a',
                 dataType: 'jsonp',
-                data: {
-                    hostedData: 'mqap.121123_mlb_batting|' + criteria + '|' + params,
-                    maxMatches: 1000
-                },
+                data: data,
                 success: function(data) {
                     var players = data.searchResults;
 
@@ -107,14 +132,19 @@ $(function() {
             var self = this,
                 html = '',
                 markers = [],
+                template,
                 fields,
                 i;
 
             // get html markup needed for the popups
             for (i=0; i<players.length; i++) {
+                template = (players[i].sourceName === 'mqap.121123_mlb_batting') ? 'batting' : 'pitching';
                 fields = self.format_fields(players[i].fields);
-                html = self.render_popup('marker', fields);
 
+                // store html to be used in popups
+                html = self.render_popup(template, fields);
+
+                // add marker to markers array
                 markers.push(self.get_marker(fields.latitude, fields.longitude, html));
             }
 
@@ -155,11 +185,12 @@ $(function() {
          * @return {String} html for Leaflet popups
          */
         render_popup: function(tmpl_name, tmpl_data) {
-            var self = this;
+            var self = this,
+                url;
 
             // get appropriate template if we haven't already
             if (!self.templates[tmpl_name]) {
-                var url = 'assets/templates/' + tmpl_name + '.html';
+                url = 'assets/templates/' + tmpl_name + '.html';
 
                 // send ajax request to retrieve external template
                 $.ajax({
@@ -193,6 +224,7 @@ $(function() {
                             break;
                         case 'salary' :
                             fields[key] = (fields[key] === null) ? 'N/A' : '$' + fields[key].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            break;
                         default : break;
                     }
                 }
@@ -231,10 +263,14 @@ $(function() {
             ul.siblings('button').text(value);
 
             // if we have a specific selection, set to model
-            if (value !== '---') {
+            if (!(/^--/.test(value))) {
                 value = (key === 'salary') ? value.match(/\d./) * 1000000 : value;
 
                 this.set_model(key, value);
+
+            // else remove attribute from model
+            } else {
+                model.unset(key, { silent: true });
             }
         },
 
