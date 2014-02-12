@@ -68,7 +68,7 @@ $(function() {
             }
 
             // clear map and get request data
-            this.group.clearLayers();
+            this.cluster.clearLayers();
             this.get_data(attributes.position, criteria, params);
         },
 
@@ -131,10 +131,15 @@ $(function() {
         show_players: function(players) {
             var self = this,
                 html = '',
-                markers = [],
                 template,
                 fields,
                 i;
+
+            // set options for Leaflet.markercluster
+            self.cluster = new L.MarkerClusterGroup({
+                showCoverageOnHover: false,
+                maxClusterRadius: 1
+            });
 
             // get html markup needed for the popups
             for (i=0; i<players.length; i++) {
@@ -144,13 +149,13 @@ $(function() {
                 // store html to be used in popups
                 html = self.render_popup(template, fields);
 
-                // add marker to markers array
-                markers.push(self.get_marker(fields.latitude, fields.longitude, html));
+                // add marker to cluster
+                self.cluster.addLayer(self.get_marker(fields.latitude, fields.longitude, html));
             }
 
-            // place markers into a Leaflet featureGroup and make it best fit
-            self.group = L.featureGroup(markers).addTo(self.map);
-            self.map.fitBounds(self.group.getBounds());
+            // add cluster to map and make it best fit
+            self.map.addLayer(self.cluster);
+            self.map.fitBounds(self.cluster.getBounds());
         },
 
         /**
