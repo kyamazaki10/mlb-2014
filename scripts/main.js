@@ -31,7 +31,7 @@ $(function() {
             // default world map view
             self.map = L.map('map', {
                 layers: MQ.mapLayer(),
-                center: [ 31.928033, -12.318236 ],
+                center: [ 10.83331, -3.33984 ],
                 zoom: 2
             });
 
