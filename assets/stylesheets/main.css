@@ -41,8 +41,10 @@ td {
 }
 
 .title {
+    font-size: 26px;
     font-weight: normal;
     float: left;
+    margin-top: 20px;
 }
 
 .controls {

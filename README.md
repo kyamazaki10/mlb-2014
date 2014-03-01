@@ -1,19 +1,12 @@
-MLB in GeoJSON
-==============
+MLB Players Map 2014
+====================
 
-All MLB players in GeoJSON!
+Mapping the birthplace of all MLB players. Available for viewing at [http://kyamazaki10.github.io/mlb-2014/](http://kyamazaki10.github.io/mlb-2014/).
 
 Data
 ----
-The data is current as of the 2013 All-Star break (July 16th).
+Stats/salaries shown are for the 2013 season.
 
 Includes
-* players who have been on the active 25-man roster for any team (excludes free agents - ex. Rick Ankiel)
-* players on the 60-day disabled list
-
-Samples
--------
-Available for viewing directly on GitHub.
-* [all batters](https://github.com/kyamazaki10/mlb-geojson/blob/master/geojson/batting.geojson)
-* [all pitchers](https://github.com/kyamazaki10/mlb-geojson/blob/master/geojson/pitching.geojson)
-* [all MLB players](https://github.com/kyamazaki10/mlb-geojson/blob/master/geojson/all.geojson)
+* projected 2014 25-man roster for all teams as of March 1, 2014
+* players currently on the disabled list
