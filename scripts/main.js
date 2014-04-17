@@ -166,7 +166,7 @@ $(function() {
         },
 
         /**
-         * Getting markers and binding mouseover event to display stats on hover
+         * Getting markers and binding mouse event to display stats on click
          * @param {Number} lat Latitude of player hometown
          * @param {Number} lng Longitude of player hometown
          * @param {String} html HTML for popups
@@ -175,8 +175,8 @@ $(function() {
         get_marker: function(lat, lng, html) {
             var marker = L.marker([ lat, lng ]).bindPopup(html);
 
-            // open popup on mouseover
-            marker.on('mouseover', function() {
+            // open popup on click
+            marker.on('click', function() {
                 this.openPopup();
             });
 
