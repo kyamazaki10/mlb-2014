@@ -7,6 +7,6 @@ Data
 ----
 Stats/salaries shown are for the 2013 season.
 
-Includes
-* projected 2014 25-man roster for all teams as of March 1, 2014
-* players currently on the disabled list
+Includes:
+* 2014 Opening Day roster for all teams
+* players on the disabled list
