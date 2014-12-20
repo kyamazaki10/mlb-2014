@@ -89,12 +89,12 @@ $(function() {
             if (position && position !== '') {
                 table_name = (pos === 'Batters') ? 'batting' : 'pitching';
 
-                data = 'hostedData=mqap.121123_mlb_' + table_name + '|' + crit + '|' + param;
+                data = 'hostedData=mqap.37172_mlb_' + table_name + '|' + crit + '|' + param;
 
             // else search all positions
             } else {
-                data = 'hostedData=mqap.121123_mlb_batting|' + crit + '|' + param;
-                data += '&hostedData=mqap.121123_mlb_pitching|' + crit + '|' + param;
+                data = 'hostedData=mqap.37172_mlb_batting|' + crit + '|' + param;
+                data += '&hostedData=mqap.37172_mlb_pitching|' + crit + '|' + param;
             }
 
             // set max number of results returned
@@ -112,7 +112,7 @@ $(function() {
 
             // send ajax request to retrieve all players fitting the search criteria
             $.ajax({
-                url: 'http://www.mapquestapi.com/search/v2/recordinfo?key=Fmjtd%7Cluubn9ubl9%2C2n%3Do5-902n1a',
+                url: 'http://www.mapquestapi.com/search/v2/recordinfo?key=Jmjtd%7Cluu225u7ng%2C8x%3Do5-lz2a1',
                 dataType: 'jsonp',
                 data: data,
                 success: function(data) {
