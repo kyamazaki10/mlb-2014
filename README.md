@@ -1,7 +1,9 @@
 MLB Players Map 2014
 ====================
 
-Mapping the birthplace of all MLB players. Available for viewing at [http://kyamazaki10.github.io/mlb-2014/](http://kyamazaki10.github.io/mlb-2014/).
+Mapping the birthplace of all MLB players.
+
+[http://kyamazaki10.github.io/mlb-2014/](http://kyamazaki10.github.io/mlb-2014/)
 
 Data
 ----
