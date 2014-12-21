@@ -143,7 +143,7 @@ $(function() {
 
             // get html markup needed for the popups
             for (i=0; i<players.length; i++) {
-                template = (players[i].sourceName === 'mqap.121123_mlb_batting') ? 'batting' : 'pitching';
+                template = (players[i].sourceName === 'mqap.37172_mlb_batting') ? 'batting' : 'pitching';
                 fields = self.format_fields(players[i].fields);
 
                 // store html to be used in popups
